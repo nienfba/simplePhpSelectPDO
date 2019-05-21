@@ -1,0 +1,28 @@
+<section class="table-responsive">
+    <table id="tableDonnee" class="table">
+        <thead>
+            <th>Numéro Employes</th>
+            <th>Nom</th>
+            <th>Prénom </th>
+            <th>Num poste</th>
+            <th>Email</th>
+            <th>Num Bureau</th>
+            <th>Sup. hiérarchique</th>
+            <th>Titre</th>
+        </thead>
+        <tbody>
+            <?php foreach($employees as $employee):?>
+                <tr>
+                    <td><a href="employee.php?id=<?=$employee['employeeNumber']?>" data-toggle="tooltip" data-html="true" data-placement="top" title="<i class='fas fa-eye'></i> Voir la fiche"><?=$employee['employeeNumber']?></a></td>
+                    <td><?=$employee['lastName']?></td>
+                    <td><?=$employee['firstName']?></td>
+                    <td><?=$employee['extension']?></td>
+                    <td><?=$employee['email']?></td>
+                    <td><?=$employee['officeCode']?></td>
+                    <td><a href="employee.php?id=<?=$employee['reportsTo']?>" data-toggle="tooltip" data-html="true" data-placement="top" title="<p><?=$employee['firstNameReportsTo']?> <?=$employee['lastNameReportsTo']?> (<?=$employee['jobTitleReportsTo']?>)</p><i class='fas fa-eye'></i> Voir la fiche"><?=$employee['reportsTo']?></a></td>
+                    <td><?=$employee['jobTitle']?></td>
+                </tr>
+            <?php endforeach;?>
+        </tbody>
+    </table>
+</section>

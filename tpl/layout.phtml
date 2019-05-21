@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title><?=$title?></title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="vendor/fontawesome-free/css/all.min.css">
+
+    <!--Datatable -->
+    <link href="http://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css
+" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="index.php">Gestion des clients</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item <?php if($activeMenu=='home'){ echo 'active';}?>">
+              <a class="nav-link" href="index.php">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <?php if($activeMenu=='orders'){ echo 'active';}?>" href="orders.php"><i class="fas fa-comment-dollar"></i> Commandes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <?=($activeMenu=='clients')?'active':''?>" href="customers.php"><i class="fas fa-users"></i> Clients</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <?=($activeMenu=='employes')?'active':''?>"" href="employees.php"><i class="fas fa-user-secret"></i> Employés</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link <?=($activeMenu=='products')?'active':''?>"" href="products.php"><i class="fas fa-truck-pickup"></i> Produits</a>
+            </li>
+          </ul>
+          <form action="search.php" class="form-inline my-2 my-lg-0" method="POST">
+            <input class="form-control mr-sm-2" name="search" type="search" placeholder="Recherche" aria-label="Search">
+            <button class="btn my-2 my-sm-0" type="submit">Ok</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h1 class="mt-5"><?=$title?></h1>
+          <?php
+
+            include('tpl/'.$vue);
+
+            ?>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="http://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    
+    <!-- Data Table -->
+    <script>
+        $(function () {
+          let table = $('#tableDonnee').DataTable();
+          $('[data-toggle="tooltip"]').tooltip();
+
+          table.on('draw', function () {
+               $('[data-toggle="tooltip"]').tooltip();
+          });
+
+        });
+    </script>
+
+  </body>
+
+</html>

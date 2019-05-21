@@ -1,0 +1,51 @@
+<section class="table-responsive">
+    <h2>Employé N°<?=$employeeNumber?></h2>
+    <table class="table">
+         <thead>
+            <th>Numéro Employes</th>
+            <th>Nom</th>
+            <th>Prénom </th>
+            <th>Num poste</th>
+            <th>Email</th>
+            <th>Num Bureau</th>
+            <th>Sup. hiérarchique</th>
+            <th>Titre</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td><?=$employee['employeeNumber']?></td>
+                <td><?=$employee['lastName']?></td>
+                <td><?=$employee['firstName']?></td>
+                <td><?=$employee['extension']?></td>
+                <td><?=$employee['email']?></td>
+                <td><?=$employee['officeCode']?></td>
+                <td><a href="employee.php?id=<?=$employee['reportsTo']?>" data-toggle="tooltip" data-html="true" data-placement="top" title="<p><?=$employee['firstNameReportsTo']?> <?=$employee['lastNameReportsTo']?> (<?=$employee['jobTitleReportsTo']?>)</p><i class='fas fa-eye'></i> Voir la fiche"><?=$employee['reportsTo']?></a></td>
+                <td><?=$employee['jobTitle']?></td>
+            </tr>   
+        </tbody>
+    </table>
+    <h2>Tous les clients gérés par l'employé</h2>
+    <table id="tableDonnee" class="table">
+        <thead>
+            <th>Id</th>
+            <th>Entreprise</th>
+            <th>Nom du contact</th>
+            <th>Prénom du contact</th>
+            <th>Téléphone</th>
+            <th>Adresse</th>
+            <th>Limite crédit</th>
+        </thead>
+        <tbody>
+            <?php foreach($customers as $customer):?>
+                <tr>
+                    <td><a href="customer.php?id=<?=$customer['customerNumber']?>"><?=$customer['customerNumber']?></a></td>
+                    <td><?=$customer['customerName']?></td>
+                    <td><?=$customer['contactFirstName']?></td>
+                    <td><?=$customer['contactLastName']?></td>
+                    <td><?=$customer['phone']?></td>
+                    <td><?=$customer['addressLine1']?><br/><?=$customer['addressLine2']?><br/><?=$customer['postalCode']?> <?=$customer['city']?> - <?=$customer['country']?></td>                    <td><?=$customer['creditLimit']?> €</td>
+                </tr>
+            <?php endforeach;?>
+        </tbody>
+    </table>
+</section>

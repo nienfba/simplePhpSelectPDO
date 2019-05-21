@@ -1,0 +1,28 @@
+<div class="table-responsive">
+    <table id="tableDonnee">
+        <thead>
+            <tr>
+                <th>Num</th>
+                <th>Date</th>
+                <th>Date livraison</th>
+                <th>Date d'envoi</th>
+                <th>Status</th>
+                <th>Commentaires</th>
+                <th>N° Client</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach($orders as $index=>$order):?>
+                <tr>
+                    <td><a href="bc.php?id=<?=$order['orderNumber']?>" data-toggle="tooltip" data-html="true" data-placement="top" title="<i class='fas fa-eye'></i> Voir le bon de commande"><?=$order['orderNumber']?></a></td>
+                    <td><?=$order['orderDate']?></td>
+                    <td><?=$order['requiredDate']?></td>
+                    <td><?=$order['shippedDate']?></td>
+                    <td><?=$order['status']?></td>
+                    <td><?=$order['comments']?></td>
+                    <td><a href="customer.php?id=<?=$order['customerNumber']?>" data-toggle="tooltip" data-html="true" data-placement="top" title="<p><?=$order['customerName']?></p><i class='fas fa-eye'></i> Voir la fiche"><?=$order['customerNumber']?></a></td>
+                </tr>
+            <?php endforeach;?>
+        </tbody>
+    </table>
+</div>

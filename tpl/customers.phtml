@@ -1,0 +1,28 @@
+<section class="table-responsive">
+    <table id="tableDonnee" class="table">
+        <thead>
+            <th>Numéro Client</th>
+            <th>Nom du client</th>
+            <th>Nom du contact</th>
+            <th>Prénom du contact</th>
+            <th>Téléphone</th>
+            <th>Adresse</th>
+            <th>Employé référent</th>
+            <th>Limite crédit</th>
+        </thead>
+        <tbody>
+            <?php foreach($customers as $customer):?>
+                <tr>
+                    <td><a href="customer.php?id=<?=$customer['customerNumber']?>" data-toggle="tooltip" data-html="true" data-placement="top" title="<i class='fas fa-eye'></i> Voir la fiche"><?=$customer['customerNumber']?></a></td>
+                    <td><?=$customer['customerName']?></td>
+                    <td><?=$customer['contactFirstName']?></td>
+                    <td><?=$customer['contactLastName']?></td>
+                    <td><?=$customer['phone']?></td>
+                    <td><?=$customer['addressLine1']?><br/><?=$customer['addressLine2']?><br/><?=$customer['postalCode']?> <?=$customer['city']?> - <?=$customer['country']?></td>
+                    <td><a href="employee.php?id=<?=$customer['salesRepEmployeeNumber']?>" data-toggle="tooltip" data-html="true" data-placement="top" title="<p><?=$customer['firstName']?> <?=$customer['lastName']?></p><i class='fas fa-eye'></i> Voir la fiche"><?=$customer['salesRepEmployeeNumber']?></a></td>
+                    <td><?=$customer['creditLimit']?> €</td>
+                </tr>
+            <?php endforeach;?>
+        </tbody>
+    </table>
+</section>

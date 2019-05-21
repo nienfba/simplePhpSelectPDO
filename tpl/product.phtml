@@ -1,0 +1,53 @@
+<section class="table-responsive">
+    <h2>Produit N°<?=$productNumber?></h2>
+    <table class="table">
+        <thead>
+            <th>Code</th>
+            <th>Nom</th>
+            <th>Ligne</th>
+            <th>Echelle</th>
+            <th>Fabricant</th>
+            <th>Prix achat</th>
+            <th>Prix Vente</th>
+            <th>Prix Marge</th>
+            <th>Stock</th>
+        </thead>
+        <tbody>
+            <tr>
+                <tr>
+                    <td><?=$product['productCode']?></td>
+                    <td><?=$product['productName']?></td>
+                    <td><?=$product['productLine']?></td>
+                    <td><?=$product['productScale']?></td>
+                    <td><?=$product['productVendor']?></td>
+                    <td><?=number_format($product['buyPrice'],2,'.',' ')?> €</td>
+                    <td><?=number_format($product['MSRP'],2,'.',' ')?> €</td>
+                    <td><?=number_format($product['marge'],2,'.',' ')?> €</td>
+                    <td><?=$product['quantityInStock']?></td>
+                </tr>
+            </tr>   
+        </tbody>
+    </table>
+    <h2>Toutes les commandes de ce produit</h2>
+    <table id="tableDonnee" class="table">
+        <thead>
+            <th>Num</th>
+            <th>Date</th>
+            <th>Date livraison</th>
+            <th>Date d'envoi</th>
+            <th>Status</th>
+        </thead>
+
+        <tbody>
+            <?php foreach($orders as $index=>$order):?>
+                <tr>
+                    <td><a href="bc.php?id=<?=$order['orderNumber']?>" data-toggle="tooltip" data-html="true" data-placement="top" title="<i class='fas fa-eye'></i> Voir le bon de commande"><?=$order['orderNumber']?></a></td>
+                    <td><?=$order['orderDate']?></td>
+                    <td><?=$order['requiredDate']?></td>
+                    <td><?=$order['shippedDate']?></td>
+                    <td><?=$order['status']?></td>
+                </tr>
+            <?php endforeach;?>
+        </tbody>
+    </table>
+</section>

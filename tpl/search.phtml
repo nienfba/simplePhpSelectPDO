@@ -1,0 +1,28 @@
+
+<h2>Les clients</h2>
+<?php if($customers):?>
+    <?php 
+        include('customers.phtml');
+    ?>
+<?php else:?>
+    <p>Pas de résultat</p>
+<?php endif;?>
+
+<h2>Les produits</h2>
+<?php if($products):?>
+    <?php 
+        include('products.phtml');
+    ?>
+<?php else:?>
+    <p>Pas de résultat</p>
+<?php endif;?>
+
+<h2>Les employés</h2>
+<?php if($employees):?>
+    <?php 
+        include('employees.phtml');
+    ?>
+<?php else:?>
+    <p>Pas de résultat</p>
+<?php endif;?>
+

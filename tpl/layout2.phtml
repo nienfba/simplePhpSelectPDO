@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title><?=$title?></title>
+
+    <!-- Bootstrap core CSS  -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/simple-sidebar.css" rel="stylesheet">
+
+    <!--Datatable -->
+    <link href="http://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css
+" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="index.php">
+                        Gestion commandes
+                    </a>
+                </li>
+                <li>
+                    <a href="index.php">Dashboard</a>
+                </li>
+                <li>
+                    <a href="orders.php">Commandes</a>
+                </li>
+                <li>
+                    <a href="clients.php">Clients</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
+                <h1><?=$title?></h1>
+                <?php
+
+                include('tpl/'.$vue);
+                
+                ?>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="http://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    
+    <!-- Menu Toggle Script -->
+    <script>
+        $(document).ready( function () {
+            $("#menu-toggle").click(function(e) {
+                e.preventDefault();
+                $("#wrapper").toggleClass("toggled");
+            });
+
+       
+            $('#tableDonnee').DataTable();
+        });
+    </script>
+
+</body>
+
+</html>
