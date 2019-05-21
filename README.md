@@ -1,18 +1,15 @@
 # ClassicModel - Lecture d'une base de données en PHP
-###################################################
 
 Correction de Fabien
 Vous y trouverez l'accès aux commandes, clients, employées, bon de commandes et fiche client, produits et un formulaire de recherche.
 Il y a aussi une gestion minimaliste d'une thème (changer le fichier tpl/layout.phtml en layout2.phtml)
 
 # Pour vous entrainer vous pouvez faire différent accès :
-#######################################################
 
 L'affichage des bureaux, et/ou l'affichage des bureaux avec les employés associés.
 Une balance des paiements sur la fiche client.
 
 # Ajout d'un élément dans la base
-###############################
 Si vous voulez vous pouvez vous entrainer à l'ajout d'un élément par exemple un client.
 Pour se faire il faut créer une page addclient.php.
 Cette page affiche un formulaire de saisie pour tous les champs.
@@ -44,7 +41,6 @@ sinon
 
 
 # Prochaine étape et réfléxion :
-##############################
 Comment gérer l'application de façon plus optimisée. 
 Ici on a une gestion de la connexion sur chaque page PHP par exemple avec la gestion des exceptions.
 Ne peut-on pas réfléchir à une structure qui nous permet de mieux gérer tout ça ?
