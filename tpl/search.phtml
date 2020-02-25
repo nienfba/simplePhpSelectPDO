@@ -1,8 +1,7 @@
-
 <h2>Les clients</h2>
 <?php if($customers):?>
     <?php 
-        include('customers.phtml');
+        include('customer/list.phtml');
     ?>
 <?php else:?>
     <p>Pas de résultat</p>
@@ -11,7 +10,7 @@
 <h2>Les produits</h2>
 <?php if($products):?>
     <?php 
-        include('products.phtml');
+        include('product/list.phtml');
     ?>
 <?php else:?>
     <p>Pas de résultat</p>
@@ -20,7 +19,7 @@
 <h2>Les employés</h2>
 <?php if($employees):?>
     <?php 
-        include('employees.phtml');
+        include('employee/list.phtml');
     ?>
 <?php else:?>
     <p>Pas de résultat</p>

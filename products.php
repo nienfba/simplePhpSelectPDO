@@ -1,9 +1,9 @@
 <?php
-include('config/config.php');
-include('lib/bdd.lib.php');
+require('config/config.php');
+require('lib/bdd.lib.php');
 
 
-$vue='products.phtml';
+$vue='product/list';
 $title = 'Tous les produits';
 $activeMenu='products';
 
@@ -19,16 +19,16 @@ try
     $sth->execute();
 
     /** 4 : recupérer les résultats 
-     * On utilise FETCH car un seul résultat attendu
+     * On utilise FETCHALL car il y a plusieurs éléments à récupérer
     */
     $products = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 }
 catch(PDOException $e)
 {
-    $vue = 'erreur.phtml';
+    $vue = 'erreur';
     //Si une exception est envoyée par PDO (exemple : serveur de BDD innaccessible) on arrive ici
     $messageErreur =  'Une erreur de connexion a eu lieu :'.$e->getMessage();
 }
 
-include('tpl/layout.phtml');
+require('tpl/' . LAYOUT . '.phtml');

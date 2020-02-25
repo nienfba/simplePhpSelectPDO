@@ -1,6 +1,6 @@
 <?php
-include('config/config.php');
-include('lib/bdd.lib.php');
+require('config/config.php');
+require('lib/bdd.lib.php');
 
 
 /** On prépare les variables qui sont nécessaire au layout.phtml
@@ -9,7 +9,7 @@ include('lib/bdd.lib.php');
  * $title : le titre de la page (balise title et balise h1)
  * $activeMenu : le menu qui sera actif, donc avec une classe 'active' pour mettre en surbrillance
  */
-$vue='index.phtml';
+$vue='dashboard';
 $title = 'Dashboard';
 $activeMenu = 'home';
 
@@ -55,17 +55,17 @@ catch (PDOException $e)
     /** Si on a une erreur de connexion ou de requête PDO on modifie la vue pour la vue erreur.phtml
      * On définie une variable $messageErreur qui sera affichée dans la vue !
      */
-    $vue = 'erreur.phtml';
+    $vue = 'erreur';
     //Si une exception est envoyée par PDO (exemple : serveur de BDD innaccessible) on arrive ici
     $messageErreur =  'Une erreur de connexion a eu lieu :'.$e->getMessage();
 }
 
-/** On inclu lr layout pour afficher les résultats 
- * Le layout est commun à toutes les pages. On y incclu dedans la vue, ce qui évite de découper le layout en header/footer 
+/** On inclu le layout pour afficher les résultats 
+ * Le layout est commun à toutes les pages. On y inclu dedans la vue, ce qui évite de découper le layout en header/footer 
  * et d'inclure à chaque fois ces éléments dans chaque vue. Beaucoup plus simple. En plus on peut changer de layout facilement (donc de mise en forme).
- * Essayez de remplacer layout.phtml par layout2.phtml ! Magique ;)
+ * Essayez de remplacer layout par layout2 fans le fichier config ! Magique ;)
 */
-include('tpl/layout.phtml');
+require('tpl/'. LAYOUT .'.phtml');
 
 
 

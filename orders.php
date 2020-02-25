@@ -1,9 +1,9 @@
 <?php
-include('config/config.php');
-include('lib/bdd.lib.php');
+require('config/config.php');
+require('lib/bdd.lib.php');
 
 
-$vue='orders.phtml';
+$vue='order/list';
 $title = 'Toutes les commandes';
 $activeMenu='orders';
 
@@ -31,14 +31,14 @@ try
 }
 catch (PDOException $e)
 {
-    $vue = 'erreur.phtml';
+    $vue = 'erreur';
     //Si une exception est envoyée par PDO (exemple : serveur de BDD innaccessible) on arrive ici
     $messageErreur =  'Une erreur de connexion a eu lieu :'.$e->getMessage();
 }
 
 
 /** On inclu la vue pour afficher les résultats */
-include('tpl/layout.phtml');
+require('tpl/' . LAYOUT . '.phtml');
 
 
 

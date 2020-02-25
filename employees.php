@@ -1,9 +1,9 @@
 <?php
-include('config/config.php');
-include('lib/bdd.lib.php');
+require('config/config.php');
+require('lib/bdd.lib.php');
 
 
-$vue='employees.phtml';
+$vue='employee/list';
 $title = 'Tous les employés';
 $activeMenu='employes';
 
@@ -28,9 +28,9 @@ try
 }
 catch(PDOException $e)
 {
-    $vue = 'erreur.phtml';
+    $vue = 'erreur';
     //Si une exception est envoyée par PDO (exemple : serveur de BDD innaccessible) on arrive ici
     $messageErreur =  'Une erreur de connexion a eu lieu :'.$e->getMessage();
 }
 
-include('tpl/layout.phtml');
+require('tpl/' . LAYOUT . '.phtml');

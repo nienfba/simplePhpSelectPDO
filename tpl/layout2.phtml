@@ -8,17 +8,18 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><?=$title?></title>
+    <title><?= $title ?></title>
 
     <!-- Bootstrap core CSS  -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="vendor/fontawesome-free/css/all.min.css">
 
     <!-- Custom styles for this template -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
 
     <!--Datatable -->
-    <link href="http://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css
-" rel="stylesheet">
+    <link href="vendor/dataTable/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -29,20 +30,25 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                <li class="sidebar-brand">
-                    <a href="index.php">
-                        Gestion commandes
-                    </a>
+                <li>
+                    <a class="<?= ($activeMenu == 'home') ? 'active' : '' ?>" href="index.php"><i class="fas fa-chart-line"></i> Dashboard</a>
                 </li>
                 <li>
-                    <a href="index.php">Dashboard</a>
+                    <a class="<?= ($activeMenu == 'orders') ? 'active' : '' ?>" href="orders.php"><i class="fas fa-comment-dollar"></i> Commandes</a>
                 </li>
                 <li>
-                    <a href="orders.php">Commandes</a>
+                    <a class="<?= ($activeMenu == 'clients') ? 'active' : '' ?>" href="customers.php"><i class="fas fa-users"></i> Clients</a>
                 </li>
                 <li>
-                    <a href="clients.php">Clients</a>
+                    <a class="<?= ($activeMenu == 'employes') ? 'active' : '' ?>"" href=" employees.php"><i class="fas fa-user-secret"></i> Employés</a>
                 </li>
+                <li>
+                    <a class="<?= ($activeMenu == 'products') ? 'active' : '' ?>"" href=" products.php"><i class="fas fa-truck-pickup"></i> Produits</a>
+                </li>
+                <form action="search.php" class="form-inline my-2 my-lg-0" method="POST">
+                    <input class="form-control mr-sm-1" name="search" type="search" placeholder="Recherche" aria-label="Search">
+                    <button class="btn my-2 my-sm-0" type="submit">Ok</button>
+                </form>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
@@ -51,11 +57,9 @@
         <div id="page-content-wrapper">
             <div class="container-fluid">
                 <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Toggle Menu</a>
-                <h1><?=$title?></h1>
+                <h1><?= $title ?></h1>
                 <?php
-
-                include('tpl/'.$vue);
-                
+                include('tpl/' . $vue . '.phtml');
                 ?>
             </div>
         </div>
@@ -66,18 +70,42 @@
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="http://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    
+    <script src="vendor/dataTable/datatables.min.js"></script>
+
     <!-- Menu Toggle Script -->
     <script>
-        $(document).ready( function () {
+        $(document).ready(function() {
             $("#menu-toggle").click(function(e) {
                 e.preventDefault();
                 $("#wrapper").toggleClass("toggled");
             });
 
-       
-            $('#tableDonnee').DataTable();
+
+            /** Chargement de DataTable sur toutes la table #tableDonnee */
+            let table = $('#tableDonnee').DataTable({
+                colReorder: true,
+                stateSave: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'pageLength',
+                    'print',
+                    'copyHtml5',
+                    'csvHtml5',
+                    'pdfHtml5',
+                    'colvis'
+                ],
+                language: {
+                    url: 'vendor/dataTable/i18n/fr.json'
+                }
+            });
+
+            /** Prise en charge du ToolTip Bootstrap */
+            $('[data-toggle="tooltip"]').tooltip();
+
+            /** Prise en charge du ToolTip Bootstrap en cas de tri sur les tables */
+            table.on('draw', function() {
+                $('[data-toggle="tooltip"]').tooltip();
+            });
         });
     </script>
 

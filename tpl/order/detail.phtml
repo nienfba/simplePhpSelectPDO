@@ -27,12 +27,12 @@
             </tr>
             <tr>
                 <th colspan="3">TVA (20 %)</th>
-                <th><?= number_format($orderTotalAmount * 0.20, 2, '.', ' ') ?> €</th>
+                <th><?= number_format($orderTotalAmount * TVA/100, 2, '.', ' ') ?> €</th>
             </tr>
             <tr>
                 <th colspan="3">Montant Total TTC</th>
                 <!-- Multiplier par 1.20 revient à ajouter 20% à une variable -->
-                <th><?= number_format($orderTotalAmount * 1.20, 2, '.', ' ') ?> €</th>
+                <th><?= number_format($orderTotalAmount * (TVA/100+1), 2, '.', ' ') ?> €</th>
             </tr>
         </tfoot>
         <tbody>

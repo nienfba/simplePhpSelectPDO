@@ -1,10 +1,10 @@
 <?php
 
-include('config/config.php');
-include('lib/bdd.lib.php');
+require('config/config.php');
+require('lib/bdd.lib.php');
 
 
-$vue='product.phtml';
+$vue='product/detail';
 $title = 'Fiche produit';
 $activeMenu='products';
 
@@ -23,16 +23,16 @@ try
     $dbh = connexion();
 
     /**2 : Prépare ma requête SQL */
-    $sth = $dbh->prepare('SELECT *,(MSRP - buyPrice) as marge FROM '.DB_PREFIXE.'products p INNER JOIN productlines pl ON (p.productLine = pl.productLine) WHERE productCode = ?');
+    $sth = $dbh->prepare('SELECT *,(MSRP - buyPrice) as marge FROM '.DB_PREFIXE. 'products p INNER JOIN productlines pl ON (p.productLine = pl.productLine) WHERE productCode = :productCode');
 
     /** 3 : executer la requête et bindage en une ligne
      * Attention : ici je fais confiance à PDO pour binder correctement la valeur.
-     * J'utilise donc un ? dans la préparation de la requête et je passe un tableau indéxé à execute.
+     * J'utilise un :productCode dans la préparation de la requête et je passe un tableau associatif avec un index "productCode" à execute.
      * Dans un projet sérieux on préfèrera utiliser bindValue ou bindParam comme je vous l'ai montré. 
-     * Mais dans la réalité vous pourrez aussi être confronté à des requête avec des ?. C'est pour 
-     * cette raison que je vous présente cela dans cette correction et pour toutes les requêtes ! 
-    */
-    $sth->execute(array($productNumber));
+     * Mais dans la réalité vous pourrez aussi être confronté à des requête avec des :nomIndex et passer un tableau associatif à execute(). 
+     * C'est pour cette raison que je vous présente cela dans cette correction et pour toutes les requêtes ! 
+     */
+    $sth->execute(array('productCode'=>$productNumber));
 
     /** 4 : recupérer les résultats 
      * On utilise FETCH car un seul résultat attendu
@@ -45,27 +45,26 @@ try
      * On commence à l'étape 2 
     */
     /**2 : Prépare ma requête SQL */
-    $sth = $dbh->prepare('SELECT * FROM '.DB_PREFIXE.'orders o INNER JOIN orderdetails od ON (o.orderNumber = od.orderNumber) WHERE od.productCode = ?');
+    $sth = $dbh->prepare('SELECT * FROM '.DB_PREFIXE. 'orders o INNER JOIN orderdetails od ON (o.orderNumber = od.orderNumber) WHERE od.productCode = :productCode');
     /** 3 : executer la requête */
-    $sth->execute(array($productNumber));
+    $sth->execute(array('productCode' => $productNumber));
     /** 4 : recupérer les résultats */
     $orders = $sth->fetchAll(PDO::FETCH_ASSOC);
 
 }
 catch(PDOException $e)
 {
-    $vue = 'erreur.phtml';
+    $vue = 'erreur';
     //Si une exception est envoyée par PDO (exemple : serveur de BDD innaccessible) on arrive ici
     $messageErreur = 'Une erreur de connexion a eu lieu :'.$e->getMessage();
 }
 catch(Exception $e)
 {
-    $vue = 'erreur.phtml';
+    $vue = 'erreur';
     //Si une exception est envoyée
     $messageErreur =  'Erreur dans la page :'.$e->getMessage();
 }
 
 
-
-include('tpl/layout.phtml');
+require('tpl/' . LAYOUT . '.phtml');
 

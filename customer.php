@@ -1,28 +1,29 @@
 <?php
-include('config/config.php');
-include('lib/bdd.lib.php');
+require('config/config.php');
+require('lib/bdd.lib.php');
 
 
-$vue='customer.phtml';
+$vue='customer/detail';
 $title = 'Fiche client';
 $activeMenu='clients';
 
 try
 {
-    /** On envoi une exception si l'id n'est pas pasé dans la chaine de requête
-     * Le reste des ligne du bloc try ne sera pas executé
+    /** On envoi une exception si l'id n'est pas passée dans la chaîne de requête
+     * Le reste des lignes du bloc try ne sera pas executé
      * On va directement au bloc catch
      */
-    if(!array_key_exists('id',$_GET))
+    if (!array_key_exists('id', $_GET) || !is_numeric($_GET['id'])) {
         throw new Exception('Tu fais quoi ici ?');
-
+    }
+    
     $customerNumber = $_GET['id'];
 
     /** 1 : connexion au serveur de BDD - SGBDR */
     $dbh = connexion();
 
     /**2 : Prépare ma requête SQL */
-    $sth = $dbh->prepare('SELECT * FROM '.DB_PREFIXE.'customers WHERE customerNumber = ?');
+    $sth = $dbh->prepare('SELECT * FROM ' . DB_PREFIXE . 'customers c INNER JOIN employees e on (c.salesRepEmployeeNumber = e.employeeNumber) WHERE customerNumber = ? ORDER BY customerNumber');
 
     /** 3 : executer la requête et bindage en une ligne
      * Attention : ici je fais confiance à PDO pour binder correctement la valeur.
@@ -54,18 +55,17 @@ try
 }
 catch(PDOException $e)
 {
-    $vue = 'erreur.phtml';
+    $vue = 'erreur';
     //Si une exception est envoyée par PDO (exemple : serveur de BDD innaccessible) on arrive ici
     $messageErreur = 'Une erreur de connexion a eu lieu :'.$e->getMessage();
 }
 catch(Exception $e)
 {
-    $vue = 'erreur.phtml';
+    $vue = 'erreur';
     //Si une exception est envoyée
     $messageErreur =  'Erreur dans la page :'.$e->getMessage();
 }
 
 
-
-include('tpl/layout.phtml');
+require('tpl/' . LAYOUT . '.phtml');
 
